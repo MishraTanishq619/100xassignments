@@ -16,6 +16,77 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+	constructor() {
+		this.result = 0;
+	}
+	add(a) {
+		this.result += a;
+	}
+	subtract(a) {
+		this.result -= a;
+	}
+	multiply(a) {
+		this.result *= a;
+	}
+	divide(a) {
+		if (a == 0) {
+			throw Error;
+		} else {
+			this.result /= a;
+		}
+	}
+
+	clear() {
+		this.result = 0;
+	}
+
+	getResult() {
+		return this.result;
+	}
+
+	calculate(exp) {
+		exp.replaceAll(" ", "");
+		let ops = ["+", "-", "*", "/"];
+
+		v = "";
+		o = "";
+
+		if (exp.count("(") != exp.count("(")) {
+			throw Error;
+		}
+
+		let b = 0;
+
+		for (let i = exp.length - 1; i >= 0; i--) {
+			if (ops.includes(exp[i])) {
+				v = parseInt(v);
+				switch (exp[i]) {
+					case "+":
+						this.add(v);
+						break;
+					case "-":
+						this.subtract(v);
+						break;
+					case "*":
+						this.multiply(v);
+						break;
+					case "/":
+						this.divide(v);
+						break;
+
+					default:
+						break;
+				}
+				v = "";
+			} else if (str[i] == ("(" | ")")) {
+				if (str[i]) {
+				}
+			} else {
+				v += exp[i];
+			}
+		}
+	}
+}
 
 module.exports = Calculator;

@@ -6,7 +6,16 @@
 */
 
 function countVowels(str) {
-    // Your code here
+	// Your code here
+	str = str.toLowerCase();
+	v = "aeiou";
+	c = 0;
+	for (let i = 0; i < str.length; i++) {
+		if (v.includes(str[i])) {
+			c++;
+		}
+	}
+	return c;
 }
 
 module.exports = countVowels;
