@@ -12,6 +12,7 @@
     - For any other route not defined in the server return 404
     Testing the server - run `npm run test-fileServer` command in terminal
  */
+<<<<<<< HEAD
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -19,3 +20,54 @@ const app = express();
 
 
 module.exports = app;
+=======
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Files ...");
+});
+
+app.get("/file/:filename", (req, res) => {
+  let filename = req.params.filename;
+  //   console.log(req.params.filename);
+  fs.readFile(`files/${filename}`, (err, data) => {
+    if (err) {
+      res.status(404).send("File not found");
+    }
+    res.status(200).send(data);
+  });
+});
+
+app.get("/files", (req, res) => {
+  var q = `<ul>`;
+  var list = [];
+  fs.readdir("files", (err, files) => {
+    // async callback
+    files.forEach((i) => {
+      list.push(i);
+      //   console.log(i);
+      q += `<li>${i}</li>`;
+    });
+    q += `</ul>`;
+    // console.log(list, q);
+    res.status(200).send(list);
+  });
+});
+
+app.use((req, res) => {
+  res.status(404).send("Route not found");
+});
+
+// app.all("*", (req, res) => {
+//   res.status(404).send("Route not found");
+// });
+
+// app.listen(3000, () => {
+//   console.log(`Example app listening on port 3000`);
+// });
+
+module.exports = app;
+>>>>>>> 6590e11 (23/2/24)
